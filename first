@@ -1,0 +1,34 @@
+import cv2
+
+# Görüntüyü yükle
+img = cv2.imread('images.jpeg')
+
+# 1. Grayscale (Gri Tonlama)
+gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# 2. Scaling (Boyutlandırma - Genişlik ve Yüksekliği yarıya indir)
+resized_img = cv2.resize(img, None, fx=0.5, fy=0.5)
+
+# 3. Rotating (90 Derece Döndürme)
+rotated_img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+
+
+# 4. Blurring (Gaussian Blur)
+blurred_img = cv2.GaussianBlur(img, (31, 31), 0)
+
+# 5. Edge Detection (Canny Algoritması)
+edges = cv2.Canny(gray_img, 100, 200)
+
+# 6. Histogram Equalization (Sadece gri tonlamalı resimde çalışır)
+equalized_img = cv2.equalizeHist(gray_img)
+
+# 7. Color Space Conversion (BGR'dan HSV'ye)
+hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+cv2.imwrite('gri_sonuc2.jpg', gray_img)
+cv2.imwrite('kenar_sonuc2.jpg', edges)
+
+# Ekranda görmek istersen:
+cv2.imshow('Kenar Algilama', edges)
+cv2.waitKey(0) 
+cv2.destroyAllWindows()
